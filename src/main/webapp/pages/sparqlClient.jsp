@@ -15,16 +15,19 @@
 
 		<div style="margin-top:15px">
 			<stripes:form action="/sparqlClient.action" method="get">
-			
+				<div>
 							<label for="endpointSelect" class="question">SPARQL endpoint:</label>
-							<stripes:select name="endpoint" id="endpointSelect" style="display:block">
+							<stripes:select name="endpoint" id="endpointSelect">
 						   		<c:forEach var="endpoint" items="${actionBean.endpoints}">
 									<stripes:option value="${endpoint}" label="${endpoint}"/>
 						   		</c:forEach>
 						   	</stripes:select>
+				</div>
+				<div>
 							<label for="queryText" class="question">Query:</label>
-							<stripes:textarea name="query" id="queryText" rows="4" cols="80" style="display:block"/>
+							<stripes:textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%"/>
 							<stripes:submit name="execute" value="Execute" id="executeButton"/>
+				</div>
 
 				<c:if test="${not empty actionBean.query || not empty actionBean.explore}">
 					<c:choose>
