@@ -25,7 +25,7 @@
 				</div>
 				<div>
 							<label for="queryText" class="question">Query:</label>
-							<stripes:textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%"/>
+							<textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%">${actionBean.query}</textarea>
 							<stripes:submit name="execute" value="Execute" id="executeButton"/>
 				</div>
 
