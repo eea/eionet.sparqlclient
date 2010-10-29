@@ -4,7 +4,8 @@
 	<entry key="http://dbpedia.org/sparql"/>
 	<entry key="http://services.data.gov.uk/analytics/sparql"/>
 	<entry key="http://semantic.data.gov/sparql"/>
-	<entry key="http://semantic.data.gov/sparql"/>
 	<entry key="http://services.data.gov.uk/environment/sparql"/>
 	<entry key="http://services.data.gov.uk/transport/sparql"/>
+	<entry key="http://services.data.gov.uk/finance/sparql"/>
+	<entry key="http://services.data.gov.uk/education/sparql"/>
 </properties>
