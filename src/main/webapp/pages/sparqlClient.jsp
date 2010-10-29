@@ -26,7 +26,7 @@
 							<stripes:textarea name="query" id="queryText" rows="4" cols="80" style="display:block"/>
 							<stripes:submit name="execute" value="Execute" id="executeButton"/>
 
-				<c:if test="${not empty actionBean.query}">
+				<c:if test="${not empty actionBean.query || not empty actionBean.explore}">
 					<c:choose>
 						<c:when test="${not empty actionBean.result && not empty actionBean.result.rows}">
 							
@@ -42,13 +42,24 @@
 											<c:forEach items="${actionBean.result.variables}" var="variable">
 												<td>
 													<c:choose>
-														<c:when test="${resultRow[variable].literal}">
-															<c:out value="${resultRow[variable].value}"/>
+														<c:when test="${not empty resultRow[variable]}">
+															<c:choose>
+																<c:when test="${resultRow[variable].literal}">
+																	<c:out value="${resultRow[variable].value}"/>
+																</c:when>
+																<c:otherwise>
+																	<stripes:link href="/sparqlClient.action"><c:out value="${resultRow[variable].value}"/>
+																		<stripes:param name="explore" value="${fn:escapeXml(resultRow[variable].value)}"/>
+																		<stripes:param name="endpoint" value="${actionBean.endpoint}"/>
+																		<c:if test="${not empty actionBean.query}">
+																			<stripes:param name="query" value="${actionBean.query}"/>
+																		</c:if>
+																	</stripes:link>
+																</c:otherwise>
+															</c:choose>
 														</c:when>
 														<c:otherwise>
-															<a class="link-external" href="${fn:escapeXml(resultRow[variable].value)}">
-																<c:out value="${resultRow[variable].value}"/>
-															</a>
+															&nbsp;
 														</c:otherwise>
 													</c:choose>
 												</td>

@@ -1,5 +1,6 @@
 package eionet.sparqlClient.helpers;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,7 +34,7 @@ public class QueryExecutor {
 	 * @param endpoint
 	 * @param query
 	 */
-	public void execute(String endpoint, String query){
+	public void executeQuery(String endpoint, String query){
 		
 		QueryExecution queryExecution = null;
 		try{
@@ -58,6 +59,21 @@ public class QueryExecutor {
 				}
 			}
 		}
+	}
+
+	/** */
+	private static final String exploreQueryTempl = "SELECT DISTINCT ?subj ?pred ?obj WHERE  {" +
+			" {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }" +
+			" UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }} LIMIT 50";
+	/**
+	 * 
+	 * @param endpoint
+	 * @param exploreSubject
+	 */
+	public void executeExploreQuery(String endpoint, String exploreSubject){
+		
+		String exploreQuery = StringUtils.replace(exploreQueryTempl, "@exploreSubject@", exploreSubject);
+		executeQuery(endpoint, exploreQuery);
 	}
 	
 	/**

@@ -28,6 +28,7 @@ public class SPARQLClientActionBean extends AbstractActionBean{
 	/** */
 	private String endpoint;
 	private String query;
+	private String explore;
 	
 	/** */
 	private QueryResult result;
@@ -37,33 +38,23 @@ public class SPARQLClientActionBean extends AbstractActionBean{
 	 * @return
 	 */
 	@DefaultHandler
-	public Resolution get(){
-		return new ForwardResolution(FORM_PAGE);
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
 	public Resolution execute(){
 		
-		if (!StringUtils.isBlank(endpoint) && !StringUtils.isBlank(query)){
-		
-			QueryExecutor queryExecutor = new QueryExecutor();
-			queryExecutor.execute(endpoint, query);
-			result = queryExecutor.getResults();
+		if (!StringUtils.isBlank(endpoint)){
+			
+			if (!StringUtils.isBlank(explore)){
+				QueryExecutor queryExecutor = new QueryExecutor();
+				queryExecutor.executeExploreQuery(endpoint, explore);
+				result = queryExecutor.getResults();
+			}
+			else if (!StringUtils.isBlank(query)){
+				QueryExecutor queryExecutor = new QueryExecutor();
+				queryExecutor.executeQuery(endpoint, query);
+				result = queryExecutor.getResults();
+			}
 		}
 		
 		return new ForwardResolution(FORM_PAGE);
-	}
-	
-	@ValidationMethod(on={"execute"})
-	public void validateExecute(){
-		
-		// TODO Use a proper error feedback approach
-		if (StringUtils.isBlank(endpoint) || StringUtils.isBlank(query)){
-			throw new IllegalArgumentException("Both endpoint and query must not be empty");
-		}
 	}
 
 	/**
@@ -108,5 +99,19 @@ public class SPARQLClientActionBean extends AbstractActionBean{
 	 */
 	public QueryResult getResult() {
 		return result;
+	}
+
+	/**
+	 * @param explore the explore to set
+	 */
+	public void setExplore(String explore) {
+		this.explore = explore;
+	}
+
+	/**
+	 * @return the explore
+	 */
+	public String getExplore() {
+		return explore;
 	}
 }
