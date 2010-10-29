@@ -70,10 +70,11 @@ public class QueryExecutor {
 	 * @param endpoint
 	 * @param exploreSubject
 	 */
-	public void executeExploreQuery(String endpoint, String exploreSubject){
+	public String executeExploreQuery(String endpoint, String exploreSubject){
 		
 		String exploreQuery = StringUtils.replace(exploreQueryTempl, "@exploreSubject@", exploreSubject);
 		executeQuery(endpoint, exploreQuery);
+		return exploreQuery;
 	}
 	
 	/**

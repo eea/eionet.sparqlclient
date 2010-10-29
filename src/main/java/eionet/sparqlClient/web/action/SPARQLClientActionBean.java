@@ -44,7 +44,7 @@ public class SPARQLClientActionBean extends AbstractActionBean{
 			
 			if (!StringUtils.isBlank(explore)){
 				QueryExecutor queryExecutor = new QueryExecutor();
-				queryExecutor.executeExploreQuery(endpoint, explore);
+				query = queryExecutor.executeExploreQuery(endpoint, explore);
 				result = queryExecutor.getResults();
 			}
 			else if (!StringUtils.isBlank(query)){
