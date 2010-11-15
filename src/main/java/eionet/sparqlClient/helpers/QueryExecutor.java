@@ -62,9 +62,9 @@ public class QueryExecutor {
 	}
 
 	/** */
-	private static final String exploreQueryTempl = "SELECT DISTINCT ?subj ?pred ?obj WHERE  {" +
-			" {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }" +
-			" UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }} LIMIT 50";
+	private static final String exploreQueryTempl = "SELECT DISTINCT ?subj ?pred ?obj WHERE {\n" +
+			" {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }\n" +
+			" UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }\n} LIMIT 50";
 	/**
 	 * 
 	 * @param endpoint

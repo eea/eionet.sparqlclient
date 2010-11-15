@@ -25,7 +25,12 @@
 				</div>
 				<div>
 							<label for="queryText" class="question">Query:</label>
-							<textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%">${actionBean.query}</textarea>
+							<textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%"><c:if test="${empty actionBean.query}">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+SELECT DISTINCT ?class ?label WHERE {
+  _:subj a ?class . 
+  OPTIONAL { ?class rdfs:label ?label }
+} LIMIT 50 OFFSET 0</c:if>${actionBean.query}</textarea>
 							<stripes:submit name="execute" value="Execute" id="executeButton"/>
 				</div>
 

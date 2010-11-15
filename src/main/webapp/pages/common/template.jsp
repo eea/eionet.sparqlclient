@@ -28,7 +28,7 @@
 			<script type="text/javascript" src="<c:url value="/scripts/util.js"/>"></script>
 			<script type="text/javascript" src="<c:url value="/scripts/pageops.js"/>"></script>
 		</head>
-		<body>
+		<body class="fullscreen">
 			<div id="container">
 				<div id="toolribbon">
 					<div id="lefttools">
