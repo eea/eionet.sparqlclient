@@ -12,15 +12,15 @@ import net.sourceforge.stripes.localization.DefaultLocalePicker;
  *
  */
 public class LocalePicker extends DefaultLocalePicker {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.sourceforge.stripes.localization.DefaultLocalePicker#pickCharacterEncoding(javax.servlet.http.HttpServletRequest, java.util.Locale)
-	 */
-	public String pickCharacterEncoding(HttpServletRequest request, Locale locale) {
-		
-		String encoding = super.pickCharacterEncoding(request, locale);
-		return encoding == null ? "UTF-8" : null;
-	}
+    
+    /*
+     * (non-Javadoc)
+     * @see net.sourceforge.stripes.localization.DefaultLocalePicker#pickCharacterEncoding(javax.servlet.http.HttpServletRequest, java.util.Locale)
+     */
+    public String pickCharacterEncoding(HttpServletRequest request, Locale locale) {
+        
+        String encoding = super.pickCharacterEncoding(request, locale);
+        return encoding == null ? "UTF-8" : null;
+    }
 
 }

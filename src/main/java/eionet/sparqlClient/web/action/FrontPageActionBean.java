@@ -13,13 +13,13 @@ import net.sourceforge.stripes.action.UrlBinding;
 @UrlBinding("/index.jsp")
 public class FrontPageActionBean extends AbstractActionBean{
 
-	/**
-	 * 
-	 * @return
-	 */
-	@DefaultHandler
-	public Resolution defaultHandler(){
-		
-		return new ForwardResolution(SPARQLClientActionBean.class);
-	}
+    /**
+     * 
+     * @return
+     */
+    @DefaultHandler
+    public Resolution defaultHandler(){
+        
+        return new ForwardResolution(SPARQLClientActionBean.class);
+    }
 }
