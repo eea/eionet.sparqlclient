@@ -43,8 +43,7 @@ public class QueryExecutor {
 
             if (rs == null || !rs.hasNext()) {
                 logger.info("The query gave no results");
-            }
-            else {
+            } else {
 //              ResultSetFormatter.outputAsXML(System.out, rs);
                 results = new QueryResult(rs);
             }
@@ -52,8 +51,7 @@ public class QueryExecutor {
             if (queryExecution != null) {
                 try {
                     queryExecution.close();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     logger.info("Failed to close QueryExecution object: " + e.toString());
                 }
             }
@@ -61,9 +59,9 @@ public class QueryExecutor {
     }
 
     /** */
-    private static final String exploreQueryTempl = "SELECT DISTINCT ?subj ?pred ?obj WHERE {\n" +
-            " {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }\n" +
-            " UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }\n} LIMIT 50";
+    private static final String EXPLORE_QUERY_TEMPL = "SELECT DISTINCT ?subj ?pred ?obj WHERE {\n"
+            + " {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }\n"
+            + " UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }\n} LIMIT 50";
     /**
      *
      * @param endpoint
@@ -71,7 +69,7 @@ public class QueryExecutor {
      */
     public String executeExploreQuery(String endpoint, String exploreSubject) {
 
-        String exploreQuery = StringUtils.replace(exploreQueryTempl, "@exploreSubject@", exploreSubject);
+        String exploreQuery = StringUtils.replace(EXPLORE_QUERY_TEMPL, "@exploreSubject@", exploreSubject);
         executeQuery(endpoint, exploreQuery);
         return exploreQuery;
     }

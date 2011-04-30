@@ -11,7 +11,7 @@ import net.sourceforge.stripes.action.UrlBinding;
  *
  */
 @UrlBinding("/index.jsp")
-public class FrontPageActionBean extends AbstractActionBean{
+public class FrontPageActionBean extends AbstractActionBean {
 
     /**
      *

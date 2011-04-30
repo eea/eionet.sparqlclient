@@ -8,7 +8,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
-public class AbstractActionBean implements ActionBean{
+public class AbstractActionBean implements ActionBean {
 
     /** */
     private eionet.sparqlClient.web.context.ActionBeanContext context;

@@ -13,11 +13,11 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
-public class QueryResult{
+public class QueryResult {
 
     /** */
     private List<String> variables;
-    private ArrayList<HashMap<String,ResultValue>> rows;
+    private ArrayList<HashMap<String, ResultValue>> rows;
 
     /**
      *
@@ -44,7 +44,7 @@ public class QueryResult{
             return;
         }
 
-        HashMap<String,ResultValue> map = new HashMap<String, ResultValue>();
+        HashMap<String, ResultValue> map = new HashMap<String, ResultValue>();
         for (String variable : variables) {
 
             ResultValue resultValue = null;
@@ -52,8 +52,7 @@ public class QueryResult{
             if (rdfNode != null) {
                 if (rdfNode.isLiteral()) {
                     resultValue = new ResultValue(rdfNode.asLiteral().getString(), true);
-                }
-                else if (rdfNode.isResource()) {
+                } else if (rdfNode.isResource()) {
                     resultValue = new ResultValue(rdfNode.asResource().toString(), false);
                 }
             }
@@ -62,7 +61,7 @@ public class QueryResult{
         }
 
         if (rows == null) {
-            rows = new ArrayList<HashMap<String,ResultValue>>();
+            rows = new ArrayList<HashMap<String, ResultValue>>();
         }
         rows.add(map);
     }

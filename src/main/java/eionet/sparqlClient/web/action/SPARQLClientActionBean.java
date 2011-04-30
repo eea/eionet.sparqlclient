@@ -20,7 +20,7 @@ import eionet.sparqlClient.helpers.SPARQLEndpoints;
  *
  */
 @UrlBinding("/sparqlClient.action")
-public class SPARQLClientActionBean extends AbstractActionBean{
+public class SPARQLClientActionBean extends AbstractActionBean {
 
     /** */
     private static final String FORM_PAGE = "/pages/sparqlClient.jsp";
@@ -46,8 +46,7 @@ public class SPARQLClientActionBean extends AbstractActionBean{
                 QueryExecutor queryExecutor = new QueryExecutor();
                 query = queryExecutor.executeExploreQuery(endpoint, explore);
                 result = queryExecutor.getResults();
-            }
-            else if (!StringUtils.isBlank(query)) {
+            } else if (!StringUtils.isBlank(query)) {
                 QueryExecutor queryExecutor = new QueryExecutor();
                 queryExecutor.executeQuery(endpoint, query);
                 result = queryExecutor.getResults();
