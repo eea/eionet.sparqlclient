@@ -11,50 +11,49 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 
 /**
- * 
+ *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
 public class QueryExecutor {
-    
+
     /** */
     private static Log logger = LogFactory.getLog(QueryExecutor.class);
-    
+
     /** */
     private QueryResult results;
 
     /**
-     * 
+     *
      */
-    public QueryExecutor(){
+    public QueryExecutor() {
     }
-    
+
     /**
-     * 
+     *
      * @param endpoint
      * @param query
      */
-    public void executeQuery(String endpoint, String query){
-        
+    public void executeQuery(String endpoint, String query) {
+
         QueryExecution queryExecution = null;
-        try{
+        try {
             queryExecution = QueryExecutionFactory.sparqlService(endpoint, query);
             ResultSet rs = queryExecution.execSelect();
 
-            if (rs==null || !rs.hasNext()){
+            if (rs == null || !rs.hasNext()) {
                 logger.info("The query gave no results");
             }
-            else{
+            else {
 //              ResultSetFormatter.outputAsXML(System.out, rs);
                 results = new QueryResult(rs);
             }
-        }
-        finally{
-            if (queryExecution!=null){
-                try{
+        } finally {
+            if (queryExecution != null) {
+                try {
                     queryExecution.close();
                 }
-                catch (Exception e){
+                catch (Exception e) {
                     logger.info("Failed to close QueryExecution object: " + e.toString());
                 }
             }
@@ -66,22 +65,22 @@ public class QueryExecutor {
             " {?subj ?pred ?obj . FILTER (?subj = <@exploreSubject@>) . }\n" +
             " UNION {?subj ?pred ?obj . FILTER (?obj = <@exploreSubject@> ) . }\n} LIMIT 50";
     /**
-     * 
+     *
      * @param endpoint
      * @param exploreSubject
      */
-    public String executeExploreQuery(String endpoint, String exploreSubject){
-        
+    public String executeExploreQuery(String endpoint, String exploreSubject) {
+
         String exploreQuery = StringUtils.replace(exploreQueryTempl, "@exploreSubject@", exploreSubject);
         executeQuery(endpoint, exploreQuery);
         return exploreQuery;
     }
-    
+
     /**
-     * 
+     *
      * @return
      */
-    public QueryResult getResults(){
+    public QueryResult getResults() {
         return results;
     }
 }

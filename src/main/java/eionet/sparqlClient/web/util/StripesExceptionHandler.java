@@ -13,12 +13,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
+ *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
 public class StripesExceptionHandler implements ExceptionHandler {
-    
+
     /** */
     private static Log logger = LogFactory.getLog(StripesExceptionHandler.class);
 
@@ -36,9 +36,9 @@ public class StripesExceptionHandler implements ExceptionHandler {
     public void handle(Throwable t,
                        HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        
+
         Throwable newThrowable = (t instanceof ServletException) ? getRootCause((ServletException)t) : t;
-        if (newThrowable==null)
+        if (newThrowable == null)
             newThrowable = t;
 
         logger.error(newThrowable.getMessage(), newThrowable);
@@ -47,12 +47,12 @@ public class StripesExceptionHandler implements ExceptionHandler {
     }
 
     /**
-     * 
+     *
      * @param servletException
      * @return
      */
-    private Throwable getRootCause(ServletException servletException){
-        
+    private Throwable getRootCause(ServletException servletException) {
+
         Throwable rootCause = servletException.getRootCause();
         if (rootCause instanceof ServletException)
             return getRootCause((ServletException)rootCause);

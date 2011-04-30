@@ -5,18 +5,18 @@ public class ResultValue {
     /** */
     private String value;
     private boolean isLiteral;
-    
+
     /**
-     * 
+     *
      * @param value
      * @param isLiteral
      */
-    public ResultValue(String value, boolean isLiteral){
-        
+    public ResultValue(String value, boolean isLiteral) {
+
         this.value = value;
         this.isLiteral = isLiteral;
     }
-    
+
     /**
      * @return the value
      */
@@ -41,12 +41,12 @@ public class ResultValue {
     public void setLiteral(boolean isLiteral) {
         this.isLiteral = isLiteral;
     }
-    
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-    public String toString(){
+    public String toString() {
         return value;
     }
 }

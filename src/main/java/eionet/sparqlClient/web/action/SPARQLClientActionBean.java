@@ -15,54 +15,54 @@ import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.SPARQLEndpoints;
 
 /**
- * 
+ *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
 @UrlBinding("/sparqlClient.action")
 public class SPARQLClientActionBean extends AbstractActionBean{
-    
+
     /** */
     private static final String FORM_PAGE = "/pages/sparqlClient.jsp";
-    
+
     /** */
     private String endpoint;
     private String query;
     private String explore;
-    
+
     /** */
     private QueryResult result;
-    
+
     /**
-     * 
+     *
      * @return
      */
     @DefaultHandler
-    public Resolution execute(){
-        
-        if (!StringUtils.isBlank(endpoint)){
-            
-            if (!StringUtils.isBlank(explore)){
+    public Resolution execute() {
+
+        if (!StringUtils.isBlank(endpoint)) {
+
+            if (!StringUtils.isBlank(explore)) {
                 QueryExecutor queryExecutor = new QueryExecutor();
                 query = queryExecutor.executeExploreQuery(endpoint, explore);
                 result = queryExecutor.getResults();
             }
-            else if (!StringUtils.isBlank(query)){
+            else if (!StringUtils.isBlank(query)) {
                 QueryExecutor queryExecutor = new QueryExecutor();
                 queryExecutor.executeQuery(endpoint, query);
                 result = queryExecutor.getResults();
             }
         }
-        
+
         return new ForwardResolution(FORM_PAGE);
     }
 
     /**
-     * 
+     *
      * @return
      */
-    public List<String> getEndpoints(){
-        
+    public List<String> getEndpoints() {
+
         return SPARQLEndpoints.getInstance();
     }
 

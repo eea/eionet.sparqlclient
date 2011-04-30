@@ -6,7 +6,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 /**
- * 
+ *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
  *
  */
@@ -14,12 +14,12 @@ import net.sourceforge.stripes.action.UrlBinding;
 public class FrontPageActionBean extends AbstractActionBean{
 
     /**
-     * 
+     *
      * @return
      */
     @DefaultHandler
-    public Resolution defaultHandler(){
-        
+    public Resolution defaultHandler() {
+
         return new ForwardResolution(SPARQLClientActionBean.class);
     }
 }
