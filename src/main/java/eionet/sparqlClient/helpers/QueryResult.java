@@ -3,10 +3,15 @@ package eionet.sparqlClient.helpers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.openrdf.model.Literal;
+import org.openrdf.model.Value;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.TupleQueryResult;
+
+import eionet.sparqlClient.util.Util;
 
 /**
  *
@@ -17,43 +22,45 @@ public class QueryResult {
 
     /** */
     private List<String> variables;
-    private ArrayList<HashMap<String, ResultValue>> rows;
+    private ArrayList<HashMap<String,ResultValue>> rows;
+    private ArrayList<Map<String,Object>> cols;
 
     /**
      *
-     * @param rs
+     * @param queryResult
+     * @throws QueryEvaluationException
      */
-    public QueryResult(ResultSet rs) {
+    public QueryResult(TupleQueryResult queryResult) throws QueryEvaluationException {
 
-        if (rs != null && rs.hasNext()) {
+        if (queryResult != null && queryResult.hasNext()) {
 
-            this.variables = rs.getResultVars();
-            while (rs.hasNext()) {
-                add(rs.next());
+            this.variables = queryResult.getBindingNames();
+            addCols();
+            while (queryResult.hasNext()) {
+                add(queryResult.next());
             }
         }
     }
 
-    /**
-     *
-     * @param querySolution
-     */
-    private void add(QuerySolution querySolution) {
+    private void add(BindingSet bindingSet) {
 
-        if (querySolution == null || variables == null || variables.isEmpty()) {
+        if (bindingSet == null || variables == null || variables.isEmpty()) {
             return;
         }
 
-        HashMap<String, ResultValue> map = new HashMap<String, ResultValue>();
+        HashMap<String,ResultValue> map = new HashMap<String, ResultValue>();
         for (String variable : variables) {
 
             ResultValue resultValue = null;
-            RDFNode rdfNode = querySolution.get(variable);
-            if (rdfNode != null) {
-                if (rdfNode.isLiteral()) {
-                    resultValue = new ResultValue(rdfNode.asLiteral().getString(), true);
-                } else if (rdfNode.isResource()) {
-                    resultValue = new ResultValue(rdfNode.asResource().toString(), false);
+            Value value = bindingSet.getValue(variable);
+
+            if (value != null) {
+
+                String valueString = Util.escapeHtml(value.stringValue());
+                if (value instanceof Literal) {
+                    resultValue = new ResultValue(valueString, true);
+                } else {
+                    resultValue = new ResultValue(valueString, false);
                 }
             }
 
@@ -61,9 +68,32 @@ public class QueryResult {
         }
 
         if (rows == null) {
-            rows = new ArrayList<HashMap<String, ResultValue>>();
+            rows = new ArrayList<HashMap<String,ResultValue>>();
         }
         rows.add(map);
+    }
+
+    /**
+     *
+     */
+    private void addCols() {
+
+        if (variables == null || variables.isEmpty()) {
+            return;
+        }
+
+        for (String variable : variables) {
+
+            Map<String, Object> col = new HashMap<String, Object>();
+            col.put("property", variable);
+            col.put("title", variable);
+            col.put("sortable", Boolean.TRUE);
+
+            if (cols == null) {
+                cols = new ArrayList<Map<String,Object>>();
+            }
+            cols.add(col);
+        }
     }
 
     /**
@@ -78,5 +108,12 @@ public class QueryResult {
      */
     public ArrayList<HashMap<String, ResultValue>> getRows() {
         return rows;
+    }
+
+    /**
+     * @return the cols
+     */
+    public ArrayList<Map<String, Object>> getCols() {
+        return cols;
     }
 }

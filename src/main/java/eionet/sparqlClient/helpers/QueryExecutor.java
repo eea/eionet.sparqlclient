@@ -3,12 +3,12 @@ package eionet.sparqlClient.helpers;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.sparql.SPARQLRepository;
 
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFormatter;
 
 /**
  *
@@ -36,21 +36,27 @@ public class QueryExecutor {
      */
     public void executeQuery(String endpoint, String query) {
 
-        QueryExecution queryExecution = null;
+        RepositoryConnection conn = null;
         try {
-            queryExecution = QueryExecutionFactory.sparqlService(endpoint, query);
-            ResultSet rs = queryExecution.execSelect();
+            SPARQLRepository repo = new SPARQLRepository(endpoint);
+            repo.initialize();
 
-            if (rs == null || !rs.hasNext()) {
+            conn = repo.getConnection();
+            
+            TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, query);
+            TupleQueryResult bindings = q.evaluate();
+
+            if (bindings == null || !bindings.hasNext()) {
                 logger.info("The query gave no results");
             } else {
-//              ResultSetFormatter.outputAsXML(System.out, rs);
-                results = new QueryResult(rs);
+                results = new QueryResult(bindings);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            if (queryExecution != null) {
+            if (conn != null) {
                 try {
-                    queryExecution.close();
+                    conn.close();
                 } catch (Exception e) {
                     logger.info("Failed to close QueryExecution object: " + e.toString());
                 }
@@ -66,6 +72,7 @@ public class QueryExecutor {
      *
      * @param endpoint
      * @param exploreSubject
+     * @return String
      */
     public String executeExploreQuery(String endpoint, String exploreSubject) {
 
@@ -76,7 +83,7 @@ public class QueryExecutor {
 
     /**
      *
-     * @return
+     * @return QueryResult
      */
     public QueryResult getResults() {
         return results;

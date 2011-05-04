@@ -1,6 +1,5 @@
 package eionet.sparqlClient.helpers;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -64,7 +63,7 @@ public class SPARQLEndpoints extends ArrayList<String> {
 
     /**
      *
-     * @return
+     * @return SPARQLEndpoints
      */
     public static SPARQLEndpoints getInstance() {
 

@@ -6,7 +6,6 @@ import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-import net.sourceforge.stripes.validation.ValidationMethod;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -35,7 +34,7 @@ public class SPARQLClientActionBean extends AbstractActionBean {
 
     /**
      *
-     * @return
+     * @return Resolution
      */
     @DefaultHandler
     public Resolution execute() {
@@ -58,7 +57,7 @@ public class SPARQLClientActionBean extends AbstractActionBean {
 
     /**
      *
-     * @return
+     * @return List<String>
      */
     public List<String> getEndpoints() {
 
