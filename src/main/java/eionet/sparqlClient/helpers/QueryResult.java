@@ -109,6 +109,13 @@ public class QueryResult {
     public ArrayList<HashMap<String, ResultValue>> getRows() {
         return rows;
     }
+    
+    /**
+     * @param rows
+     */
+    public void setRows(ArrayList<HashMap<String, ResultValue>> rows) {
+        this.rows = rows;
+    }
 
     /**
      * @return the cols
@@ -116,4 +123,5 @@ public class QueryResult {
     public ArrayList<Map<String, Object>> getCols() {
         return cols;
     }
+    
 }
