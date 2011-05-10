@@ -11,8 +11,6 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-import eionet.sparqlClient.util.Util;
-
 /**
  *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
@@ -56,7 +54,7 @@ public class QueryResult {
 
             if (value != null) {
 
-                String valueString = Util.escapeHtml(value.stringValue());
+                String valueString = value.stringValue();
                 if (value instanceof Literal) {
                     resultValue = new ResultValue(valueString, true);
                 } else {
