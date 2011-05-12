@@ -3,6 +3,7 @@ package eionet.sparqlClient.helpers;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openrdf.query.BooleanQuery;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
@@ -63,6 +64,42 @@ public class QueryExecutor {
             }
         }
     }
+    
+    /**
+    *
+    * @param endpoint
+    * @param query
+     * @return boolean
+    */
+   public boolean executeASKQuery(String endpoint, String query) {
+
+       RepositoryConnection conn = null;
+       boolean ret = false;
+       try {
+           SPARQLRepository repo = new SPARQLRepository(endpoint);
+           repo.initialize();
+
+           conn = repo.getConnection();
+           
+           BooleanQuery resultsTableBoolean = conn.prepareBooleanQuery(QueryLanguage.SPARQL, query);
+           Boolean result = resultsTableBoolean.evaluate();
+           
+           ret = result.booleanValue();
+           
+       } catch (Exception e) {
+           e.printStackTrace();
+       } finally {
+           if (conn != null) {
+               try {
+                   conn.close();
+               } catch (Exception e) {
+                   logger.info("Failed to close RepositoryConnection object: " + e.toString());
+               }
+           }
+       }
+       
+       return ret;
+   }
 
     /** */
     private static final String EXPLORE_QUERY_TEMPL = "SELECT DISTINCT ?subj ?pred ?obj WHERE {\n"
