@@ -41,7 +41,8 @@ public class StripesExceptionHandler implements ExceptionHandler {
         if (newThrowable == null)
             newThrowable = t;
 
-        logger.error(newThrowable.getMessage(), newThrowable);
+        //FIXME: Put next line back
+        //logger.error(newThrowable.getMessage(), newThrowable);
         request.setAttribute("exception", newThrowable);
         request.getRequestDispatcher("/pages/error.jsp").forward(request, response);
     }

@@ -1,0 +1,25 @@
+ul#exploretabs {
+  display:inline-block;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+#intro {
+  margin: 1em;
+  padding: 0.5em;
+  background-color: #a5ced1;
+  border: 1px solid black;
+}
+
+.exploretab {
+  float:left;
+  border: 1px solid #000080;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 2px;
+}
+
+.literal {
+  white-space: pre-wrap;
+}

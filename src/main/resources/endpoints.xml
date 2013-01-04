@@ -4,10 +4,20 @@
 	<entry key="http://cr.eionet.europa.eu/sparql"/>
 	<entry key="http://semantic.eea.europa.eu/sparql"/>
 	<entry key="http://dbpedia.org/sparql"/>
-	<entry key="http://services.data.gov.uk/analytics/sparql"/>
+	<entry key="http://live.dbpedia.org/sparql"/>
 	<entry key="http://semantic.data.gov/sparql"/>
-	<entry key="http://services.data.gov.uk/environment/sparql"/>
 	<entry key="http://services.data.gov.uk/transport/sparql"/>
+        <entry key="http://pubchem.bio2rdf.org/sparql"/>
+        <entry key="http://bnb.data.bl.uk/sparql"/>
+        <entry key="http://data.lib.cam.ac.uk/endpoint.php"/>
+	<entry key="http://europeana-triplestore.isti.cnr.it/sparql"/>
+	<entry key="http://europeana.ontotext.com/sparql"/>
+        <entry key="http://data-gov.ie/sparql"/>
+        <entry key="http://geo.linkeddata.es/sparql"/>
+        <entry key="http://lsd.taxonconcept.org/sparql"/>
+        <!--
+        -->
+	<entry key="http://environment.data.gov.uk/sparql/bwq/query"/>
 	<entry key="http://worldbank.270a.info/sparql"/>
 	<entry key="http://eurostat.linked-statistics.org/sparql"/>
 </properties>

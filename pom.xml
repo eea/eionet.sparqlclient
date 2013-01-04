@@ -28,7 +28,7 @@
 		</repository> 
 	</repositories>
 
-	<version>2.2</version>
+	<version>3.0</version>
 	<name>sparql-client</name>
 	<url>http://maven.apache.org</url>
 
@@ -40,6 +40,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+                                        <version>2.3.2</version>
 					<inherited>true</inherited>
 					<configuration>
 						<verbose>false</verbose>
@@ -58,6 +59,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
+                                        <version>2.4</version>
 					<executions>
 						<execution>
 							<id>make-a-jar</id>
@@ -105,6 +107,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-arq</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+                <!--
+		<dependency>
 			<groupId>org.openrdf</groupId>
 			<artifactId>openrdf-alibaba</artifactId>
 			<version>2.0-beta7</version>
@@ -114,6 +122,7 @@
 			<artifactId>openrdf-sesame</artifactId>
 			<version>2.3.2</version>
 		</dependency>
+                -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
