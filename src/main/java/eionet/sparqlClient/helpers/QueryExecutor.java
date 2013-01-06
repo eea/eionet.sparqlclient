@@ -1,6 +1,5 @@
 package eionet.sparqlClient.helpers;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 /*
@@ -20,12 +19,9 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sparql.SPARQLRepository;
 */
 // Jena
-import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFormatter;
 
 /**
  * Handle execution of SPARQL query and retrieval of result. Basically a wrapper around a SPARQL client library.
@@ -37,7 +33,7 @@ public class QueryExecutor {
     /** */
     private static Log logger = LogFactory.getLog(QueryExecutor.class);
 
-    /** Variable for the results */
+    /** Variable for the results. */
     private QueryResult results;
 
     /**
@@ -46,6 +42,7 @@ public class QueryExecutor {
     public QueryExecutor() {
     }
 
+// Alternative based on OpenRDF
     /**
      * Execute a query against an endpoint.
      *
@@ -53,8 +50,7 @@ public class QueryExecutor {
      * @param query
      */
 /*
-// Alternative based on OpenRDF
-    public void executeQuery(String endpoint, String query) {
+    public void executeQuery(final String endpoint, final String query) {
 
         RepositoryConnection conn = null;
         try {
@@ -85,7 +81,13 @@ public class QueryExecutor {
     }
 */
 // Alternative based on Jena
-    public void executeQuery(String endpoint, String query) {
+    /**
+     * Execute a query against an endpoint.
+     *
+     * @param endpoint
+     * @param query
+     */
+    public void executeQuery(final String endpoint, final String query) {
 
         QueryExecution queryExecution = null;
         try {
@@ -94,8 +96,6 @@ public class QueryExecutor {
             ResultSet rs = queryExecution.execSelect();
 
             if (rs == null || !rs.hasNext()) {
-                //FIXME: Why do we log a common occurence?
-                //logger.info("The query gave no results");
                 results = null;
             } else {
                 results = new QueryResult(rs);
@@ -111,6 +111,7 @@ public class QueryExecutor {
         }
     }
 
+// Alternative based on OpenRDF.
    /**
     * Execute an ASK query. Those can only return true or false.
     *
@@ -119,7 +120,7 @@ public class QueryExecutor {
     * @return boolean
     */
 /*
-   public boolean executeASKQuery(String endpoint, String query) {
+   public boolean executeASKQuery(final String endpoint, final String query) {
 
        RepositoryConnection conn = null;
        boolean ret = false;
@@ -150,7 +151,14 @@ public class QueryExecutor {
    }
 */
 // Alternative based on Jena
-    public boolean executeASKQuery(String endpoint, String query) {
+   /**
+    * Execute an ASK query. Those can only return true or false.
+    *
+    * @param endpoint
+    * @param query
+    * @return boolean
+    */
+    public boolean executeASKQuery(final String endpoint, final String query) {
 
         QueryExecution queryExecution = null;
         boolean ret = false;

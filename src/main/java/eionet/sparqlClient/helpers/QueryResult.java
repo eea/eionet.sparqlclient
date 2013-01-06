@@ -37,7 +37,7 @@ public class QueryResult {
      */
 /*
 // OpenRDF
-    public QueryResult(TupleQueryResult queryResult) throws QueryEvaluationException {
+    public QueryResult(final TupleQueryResult queryResult) throws QueryEvaluationException {
 
         if (queryResult != null && queryResult.hasNext()) {
 
@@ -50,7 +50,7 @@ public class QueryResult {
     }
 */
 // Jena
-    public QueryResult(ResultSet rs) {
+    public QueryResult(final ResultSet rs) {
 
         if (rs != null && rs.hasNext()) {
 
@@ -64,7 +64,7 @@ public class QueryResult {
 
 /*
 // OpenRDF
-    private void add(BindingSet bindingSet) {
+    private void add(final BindingSet bindingSet) {
 
         if (bindingSet == null || variables == null || variables.isEmpty()) {
             return;
@@ -96,7 +96,7 @@ public class QueryResult {
     }
 */
 // Jena
-    private void add(QuerySolution querySolution) {
+    private void add(final QuerySolution querySolution) {
 
         if (querySolution == null || variables == null || variables.isEmpty()) {
             return;
@@ -162,14 +162,14 @@ public class QueryResult {
     }
 
     /**
-     * @param rows
+     * @param rows - the result rows.
      */
     public void setRows(ArrayList<HashMap<String, ResultValue>> rows) {
         this.rows = rows;
     }
 
     /**
-     * @return the cols
+     * @return the columns
      */
     public ArrayList<Map<String, Object>> getCols() {
         return cols;

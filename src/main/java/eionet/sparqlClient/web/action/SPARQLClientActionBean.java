@@ -30,14 +30,14 @@ public class SPARQLClientActionBean extends AbstractActionBean {
     private String query;
     /** A URI to explore. */
     private String explore;
-    /** Used to distinguish between explorer pages */
+    /** Used to distinguish between explorer pages. */
     private int tab;
 
     /** */
     private QueryResult result;
 
     /** Templates for the explore functionality. */
-    private static final String EXPLORE_QUERY_TEMPL[] = {
+    private static final String[] EXPLORE_QUERY_TEMPL = {
     /* Properties of the subject */
        "SELECT *\nWHERE {\n<@exploreSubject@> ?property ?object\n} LIMIT 100\n",
     /* Links to the subject */
@@ -48,11 +48,10 @@ public class SPARQLClientActionBean extends AbstractActionBean {
        "SELECT DISTINCT ?subject WHERE {\n GRAPH <@exploreSubject@> {\n  ?subject ?predicate ?object\n }\n} LIMIT 100\n",
     /* Graphs */
        "SELECT *\nWHERE {\nGRAPH ?graph {\n<@exploreSubject@> ?property ?object\n}\n} LIMIT 100\n"
-       
     };
 
         /** */
-    private static final String EXPLORE_QUERY_TABS[] = {
+    private static final String[] EXPLORE_QUERY_TABS = {
      "Properties",
      "Links to subject",
      "Used as a predicate",
@@ -120,7 +119,7 @@ public class SPARQLClientActionBean extends AbstractActionBean {
     /**
      * @param endpoint the endpoint to set
      */
-    public void setEndpoint(String endpoint) {
+    public void setEndpoint(final String endpoint) {
         this.endpoint = endpoint;
     }
 
@@ -134,7 +133,7 @@ public class SPARQLClientActionBean extends AbstractActionBean {
     /**
      * @param query the query to set
      */
-    public void setQuery(String query) {
+    public void setQuery(final String query) {
         this.query = query;
     }
 
@@ -148,7 +147,7 @@ public class SPARQLClientActionBean extends AbstractActionBean {
     /**
      * @param explore the URI to set
      */
-    public void setExplore(String explore) {
+    public void setExplore(final String explore) {
         this.explore = explore;
     }
 
@@ -160,9 +159,9 @@ public class SPARQLClientActionBean extends AbstractActionBean {
     }
 
     /**
-     * @param explore the URI to set
+     * @param tab the page
      */
-    public void setTab(int tab) {
+    public void setTab(final int tab) {
         //FIXME: Max value is the getNumTabs()-1
         this.tab = tab;
     }
