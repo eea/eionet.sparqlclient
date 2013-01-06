@@ -12,13 +12,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * Gets a list of well-known SPARQL endpoints.
  *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
- *
  */
 public class SPARQLEndpoints extends ArrayList<String> {
 
-    /** */
+    /** The name of the properties file containing the endpoints. */
     private static final String FILENAME = "endpoints.xml";
 
     /** */
@@ -73,6 +73,7 @@ public class SPARQLEndpoints extends ArrayList<String> {
 
                 // double-checked locking pattern
                 // (http://www.ibm.com/developerworks/java/library/j-dcl.html)
+                // FIXME: The IBM article says the pattern is broken. In Java 5 the volatile keyword can be used.
                 if (instance == null) {
                     instance = new SPARQLEndpoints();
                 }
