@@ -106,13 +106,13 @@
 	</build>
 
 	<dependencies>
+                <!--
 		<dependency>
 			<groupId>uk.me.mmt</groupId>
 			<artifactId>sprotocol</artifactId>
 			<version>1.0</version>
 		</dependency>
 
-                <!--
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-arq</artifactId>
