@@ -4,6 +4,7 @@ package eionet.sparqlClient.helpers;
  * Class to hold a result value. A value comes back from SPARQL in XML, and
  * can have metadata: The datatype, language and whether it is a literal or resource.
  * Currently we're only interested in whether it is a literal or not.
+ * TODO: Space for datatype and language.
  */
 public class ResultValue {
 

@@ -12,12 +12,16 @@ import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
-*/
 // Jena
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-
+*/
+import uk.me.mmt.sprotocol.AnyResult;
+import uk.me.mmt.sprotocol.SelectResultSet;
+import uk.me.mmt.sprotocol.SelectResultRow;
+import uk.me.mmt.sprotocol.SparqlResource;
+import uk.me.mmt.sprotocol.Literal;
 /**
  *
  * @author <a href="mailto:jaanus.heinlaid@tieto.com">Jaanus Heinlaid</a>
@@ -35,6 +39,16 @@ public class QueryResult {
      * @param queryResult
      * @throws QueryEvaluationException
      */
+// SProtocol
+    public QueryResult(final SelectResultSet rs) {
+        if (rs != null) {
+            this.variables = rs.getHead();
+            addCols();
+            for (SelectResultRow result : rs) {
+                add(result);
+            }
+        }
+    }
 /*
 // OpenRDF
     public QueryResult(final TupleQueryResult queryResult) throws QueryEvaluationException {
@@ -48,7 +62,6 @@ public class QueryResult {
             }
         }
     }
-*/
 // Jena
     public QueryResult(final ResultSet rs) {
 
@@ -61,7 +74,36 @@ public class QueryResult {
             }
         }
     }
+*/
 
+//SProtocol
+    private void add(final SelectResultRow querySolution) {
+
+        if (querySolution == null || variables == null || variables.isEmpty()) {
+            return;
+        }
+
+        HashMap<String, ResultValue> map = new HashMap<String, ResultValue>();
+        for (String variable : variables) {
+
+            ResultValue resultValue = null;
+            SparqlResource rdfNode = querySolution.get(variable);
+            if (rdfNode != null) {
+                if (rdfNode instanceof Literal) {
+                    resultValue = new ResultValue(rdfNode.getValue(), true);
+                } else {
+                    resultValue = new ResultValue(rdfNode.getValue(), false);
+                }
+            }
+
+            map.put(variable, resultValue);
+        }
+
+        if (rows == null) {
+            rows = new ArrayList<HashMap<String, ResultValue>>();
+        }
+        rows.add(map);
+    }
 /*
 // OpenRDF
     private void add(final BindingSet bindingSet) {
@@ -94,7 +136,6 @@ public class QueryResult {
         }
         rows.add(map);
     }
-*/
 // Jena
     private void add(final QuerySolution querySolution) {
 
@@ -123,6 +164,7 @@ public class QueryResult {
         }
         rows.add(map);
     }
+*/
 
     /**
      * Creates metadata information for the column names.
