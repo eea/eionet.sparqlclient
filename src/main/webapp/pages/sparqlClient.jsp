@@ -59,16 +59,48 @@ function removeExplore() {
           </c:choose>
         </div>
         <div>
-          <textarea name="query" id="queryText" rows="8" cols="80" style="display:block; width:100%"
-          onchange="removeExplore()"><c:if test="${empty actionBean.query}">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+          <div class="expandingArea">
+            <pre><span></span><br /></pre>
+            <textarea name="query" id="queryText" rows="8" cols="80" style="clear:right; display:block; width:100%"
+            onchange="removeExplore()"><c:if test="${empty actionBean.query}">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
 SELECT DISTINCT ?subject ?label
 WHERE {
   ?subject a ?class
   OPTIONAL { ?subject rdfs:label ?label }
 } LIMIT 100</c:if>${actionBean.query}</textarea>
-          <stripes:submit name="execute" value="Execute" id="executeButton"/>
+          </div>
+            <stripes:submit name="execute" value="Execute" id="executeButton"/>
         </div>
+        <script type="text/javascript">
+// <![CDATA[
+function makeExpandingArea(container) {
+ var area = container.querySelector('textarea');
+ var span = container.querySelector('span');
+ if (area.addEventListener) {
+   area.addEventListener('input', function() {
+     span.textContent = area.value;
+   }, false);
+   span.textContent = area.value;
+ } else if (area.attachEvent) {
+   // IE8 compatibility
+   area.attachEvent('onpropertychange', function() {
+     span.innerText = area.value;
+   });
+   span.innerText = area.value;
+ }
+ // Enable extra CSS
+ container.className += ' active';
+}
+
+var areas = document.querySelectorAll('.expandingArea');
+var l = areas.length;
+
+while (l--) {
+ makeExpandingArea(areas[l]);
+}
+// ]]>
+        </script>
 
         <c:choose>
           <c:when test="${not empty actionBean.query || not empty actionBean.explore}">

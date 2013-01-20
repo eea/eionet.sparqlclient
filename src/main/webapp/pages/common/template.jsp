@@ -90,7 +90,7 @@
 	                <jsp:include page="/pages/common/navigation.jsp"/>
             	</stripes:layout-component>
 
-				<div id="workarea">
+				<div id="workarea" class="documentContent">
 				
 					<!--  validation errors -->
 					<stripes:errors/>
