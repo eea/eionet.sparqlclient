@@ -69,12 +69,12 @@ public class Util {
         for (; frames.hasMoreTokens(); list.add(frames.nextToken()));
         return (String[]) list.toArray(new String[list.size()]);
     }
-    
+
     /**
-    *
-    * @param s
-    * @return String
-    */
+     * Escape HTML and change newlines to HTML &lt;br/&gt;.
+     * @param s
+     * @return String
+     */
     public static String escapeHtml(String s) {
         if (!StringUtils.isBlank(s)) {
             s = StringEscapeUtils.escapeHtml(s);

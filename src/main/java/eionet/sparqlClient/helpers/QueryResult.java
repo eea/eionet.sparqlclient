@@ -17,7 +17,6 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 */
-import uk.me.mmt.sprotocol.AnyResult;
 import uk.me.mmt.sprotocol.SelectResultSet;
 import uk.me.mmt.sprotocol.SelectResultRow;
 import uk.me.mmt.sprotocol.SparqlResource;

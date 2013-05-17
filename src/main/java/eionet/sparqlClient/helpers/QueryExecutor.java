@@ -63,7 +63,7 @@ public class QueryExecutor {
             AnyResult sparqlResult = sparql.genericQuery(query);
             ResultType sparqlResultType = sparqlResult.getResultType();
             if (ResultType.BOOLEAN == sparqlResultType) {
-                logger.info("ASK result sent the answer to the ASK is: '"+sparqlResult.getBooleanResult()+"'");
+                logger.info("ASK result sent the answer to the ASK is: '" + sparqlResult.getBooleanResult() + "'");
             } else if (ResultType.RDF == sparqlResultType) {
                 logger.info("RDF returned by the SPARQL query");
             } else if (ResultType.SPARQLRESULTS == sparqlResultType) {
@@ -71,9 +71,9 @@ public class QueryExecutor {
                 results = new QueryResult(sparqlResults);
             }
         } catch (SprotocolException e) {
-            logger.info(String.format("Threw one of its own SprotocolException: '%s'",e));
+            logger.info(String.format("Threw one of its own SprotocolException: '%s'", e));
         } catch (IOException e) {
-            logger.info(String.format("Threw an IOException: '%s'",e));
+            logger.info(String.format("Threw an IOException: '%s'", e));
         }
     }
 
@@ -158,9 +158,9 @@ public class QueryExecutor {
                 logger.info("SPARQL query returned table");
             }
         } catch (SprotocolException e) {
-            logger.info(String.format("Threw one of its own SprotocolException: '%s'",e));
+            logger.info(String.format("Threw one of its own SprotocolException: '%s'", e));
         } catch (IOException e) {
-            logger.info(String.format("Threw an IOException: '%s'",e));
+            logger.info(String.format("Threw an IOException: '%s'", e));
         }
         return false;
     }
