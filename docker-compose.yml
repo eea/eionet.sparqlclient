@@ -1,0 +1,13 @@
+# 50M mem_limit is too little.
+web:
+  restart: always
+  image: dockerrepo.eionet.europa.eu:5000/sparqlclient:latest
+  ports:
+    - "4780:8080"
+    - "4709:8009"
+  environment:
+    - CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom 
+  volumes:
+    - /etc/localtime:/etc/localtime:ro # Share timezone data with host
+  hostname: sparqlclient
+  mem_limit: 100M
