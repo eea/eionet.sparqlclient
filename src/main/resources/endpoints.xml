@@ -16,9 +16,5 @@
         <entry key="http://geo.linkeddata.es/sparql"/>
         <entry key="http://lsd.taxonconcept.org/sparql"/>
         <entry key="https://secure.umweltbundesamt.at/sense/sparql"/>
-        <!--
-        -->
 	<entry key="http://environment.data.gov.uk/sparql/bwq/query"/>
-	<entry key="http://worldbank.270a.info/sparql"/>
-	<entry key="http://eurostat.linked-statistics.org/sparql"/>
 </properties>

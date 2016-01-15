@@ -17,3 +17,8 @@ mvn -Pdocker clean install docker:push
 ```
 Then you can deploy it with docker-compose using a YAML file derived from the one you see in the top directory.
 
+Configuration
+-------------
+The application comes with a list of known endpoints in the file src/main/resources/endpoints.xml.
+These can be overridden with the system property `endpoints`, which must contain a comma-separated
+list of endpoints.

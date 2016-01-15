@@ -18,6 +18,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SPARQLEndpoints extends ArrayList<String> {
 
+    public static final String PROPERTY_NAME = "endpoints";
+
     /** The name of the properties file containing the endpoints. */
     private static final String FILENAME = "endpoints.xml";
 
@@ -26,6 +28,7 @@ public class SPARQLEndpoints extends ArrayList<String> {
 
     /** */
     private static SPARQLEndpoints instance;
+
     private static Object lock = new Object();
 
     /**
@@ -41,7 +44,7 @@ public class SPARQLEndpoints extends ArrayList<String> {
     /**
      *
      */
-    private void loadFromProperties() {
+    private void loadFromPropertiesFile() {
 
         InputStream inputStream = null;
         try {
@@ -61,7 +64,20 @@ public class SPARQLEndpoints extends ArrayList<String> {
         }
     }
 
+    private void loadFromProperties() {
+        String endpoints = System.getProperty(PROPERTY_NAME);
+        if (endpoints != null) {
+            String[] endpointArr = endpoints.split("\\s*,\\s*");
+            for (String key : endpointArr) {
+                this.add(key);
+            }
+        } else {
+            loadFromPropertiesFile();
+        }
+    }
+
     /**
+     * Create singleton.
      *
      * @return SPARQLEndpoints
      */
@@ -81,5 +97,13 @@ public class SPARQLEndpoints extends ArrayList<String> {
         }
 
         return instance;
+    }
+
+    /**
+     * Delete the singleton.
+     * For testing.
+     */
+    static void reset() {
+        instance = null;
     }
 }
