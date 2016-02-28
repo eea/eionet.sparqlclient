@@ -6,7 +6,7 @@ web:
     - "4780:8080"
     - "4709:8009"
   environment:
-    - CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom 
+    - "CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom" "-Dendpoints=http://cr.eionet.europa.eu/sparql, http://semantic.eea.europa.eu/sparql, http://dbpedia.org/sparql, http://live.dbpedia.org/sparql, http://semantic.data.gov/sparql, http://services.data.gov.uk/transport/sparql, http://pubchem.bio2rdf.org/sparql, http://bnb.data.bl.uk/sparql, http://data.lib.cam.ac.uk/endpoint.php, http://data-gov.ie/sparql, http://geo.linkeddata.es/sparql, http://lsd.taxonconcept.org/sparql, http://environment.data.gov.uk/sparql/bwq/query"
   volumes:
     - /etc/localtime:/etc/localtime:ro # Share timezone data with host
   hostname: sparqlclient

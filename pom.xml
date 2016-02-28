@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javaVersion>1.6</javaVersion>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
     <!-- configuration of Maven repositories to be used -->
@@ -229,17 +230,19 @@
                   <images>
                     <image>
                       <alias>service</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/${project.artifactId}</name>
+                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}</name>
                       <build>
                         <from>tomcat:7-jre7</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
                         <tags>
                           <tag>latest</tag>
                           <tag>${project.version}</tag>
+                          <tag>${maven.build.timestamp}</tag>
                         </tags>
                         <!-- Assembly descriptor holds the reference to the created artifact-->
                         <assembly>
-                          <descriptor>assembly.xml</descriptor>
+                          <!--descriptor>assembly.xml</descriptor-->
+                          <descriptorRef>rootWar</descriptorRef>
                         </assembly>
                         <runCmds>
                           <run>rm -rf /usr/local/tomcat/webapps/*</run>
@@ -259,16 +262,16 @@
                       <run>
                         <env>
                           <CATALINA_OPTS>-Djava.security.egd=file:/dev/./urandom</CATALINA_OPTS>
+                          <ENDPOINTS>http://cr.eionet.europa.eu/sparql, http://semantic.eea.europa.eu/sparql, http://dbpedia.org/sparql, http://live.dbpedia.org/sparql, http://semantic.data.gov/sparql, http://services.data.gov.uk/transport/sparql, http://pubchem.bio2rdf.org/sparql, http://bnb.data.bl.uk/sparql</ENDPOINTS>
                         </env>
                         <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
                         <ports>
                           <port>tomcat.port:8080</port>
                         </ports>
                         <wait>
-                          <log>Deployment of web application archive /usr/local/tomcat/webapps/ROOT.war has finished in</log>
+                          <!--<log>Deployment of web application archive /usr/local/tomcat/webapps/ROOT.war has finished in</log>-->
                           <!-- Check for this URL to return a 200 return code .... -->
-                          <!--<url>http://${docker.host.address}:${tomcat.port}/</url>-->
-                          <!-- ... but at max 60 seconds -->
+                          <url>http://${docker.host.address}:${tomcat.port}/</url>
                           <time>30000</time>
                         </wait>
                         <log>

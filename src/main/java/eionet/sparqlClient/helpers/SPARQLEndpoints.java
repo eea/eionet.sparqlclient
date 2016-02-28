@@ -65,7 +65,10 @@ public class SPARQLEndpoints extends ArrayList<String> {
     }
 
     private void loadFromProperties() {
-        String endpoints = System.getProperty(PROPERTY_NAME);
+        String endpoints = System.getenv(PROPERTY_NAME.toUpperCase());
+        if (endpoints == null) {
+            endpoints = System.getProperty(PROPERTY_NAME);
+        }
         if (endpoints != null) {
             String[] endpointArr = endpoints.split("\\s*,\\s*");
             for (String key : endpointArr) {
