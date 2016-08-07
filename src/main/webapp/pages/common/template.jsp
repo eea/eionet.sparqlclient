@@ -9,8 +9,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<meta name="Publisher" content="EEA, The European Environment Agency" />
-			<meta name="Rights" content="Copyright EEA Copenhagen 2003-2008" />
-			<base href="<%= BaseUrl.getBaseUrl(request) %>"/>
+			<meta name="Rights" content="Copyright EEA Copenhagen 2003-2016" />
 			
 			<title>SPARQL client - ${pageTitle}</title>
 			
