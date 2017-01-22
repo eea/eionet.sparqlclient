@@ -230,7 +230,7 @@
                   <images>
                     <image>
                       <alias>service</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}</name>
+                      <name>eeacms/${project.artifactId}</name>
                       <build>
                         <from>tomcat:7-jre8</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
